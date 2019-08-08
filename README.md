@@ -10,7 +10,7 @@ These are the current products:
 | 002          | Little table     | £45.00 |
 | 003          | Funky light      | £19.95 |
 
-These are the current promotional rules:
+And these are the current promotional rules:
 
 1. If you buy 2 or more very cheap chairs then the price drops to £8.50.
 2. If you spend over £60, then you get 10% off of your purchase.
@@ -23,13 +23,13 @@ Clone this repo, run `bundle install` and open IRB in your terminal. Require the
 p = ["def a() @total = @total -= 1.50 if @basket.count(\"001\") == 2 end", "def b() @total = @total * 0.9 if @total > 60 end"]
 ```
 
-Create a new checkout passing the promotional_rules as an argument
+Create a new instance of Checkout by passing the promotional_rules as an argument
 
 ```
 co = Checkout.new(p)
 ```
 
-Start scanning your items:
+Scan your items:
 
 ```
 co.scan("001")
@@ -43,6 +43,11 @@ Calculate the total and print the "receipt":
 co.total
 co.print_receipt
 ```
+
+## To test
+
+Please run `rspec`, which should give you code coverage as well.
+For code style, run `rubocop`.
 
 ## Acceptance criteria
 
