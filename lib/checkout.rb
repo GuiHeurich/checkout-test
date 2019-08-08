@@ -25,6 +25,7 @@ class Checkout
     return @total
   end
 
+private
   def apply_promotions
     @promotional_rules.each do |method|
       # transforms each rule in a method

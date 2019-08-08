@@ -2,7 +2,11 @@ require 'checkout'
 
 describe Checkout do
 
-  let(:promotional_rules) { ["def a() @total = @total * 0.9 if @total > 60 end"]}
+  let(:promotional_rules) { [
+    "def a() @total = @total -= 1.50 if @basket.count(\"001\") == 2 end",
+    "def b() @total = @total * 0.9 if @total > 60 end"
+    ] }
+    
   subject(:co) { described_class.new(promotional_rules) }
 
   describe "#scan" do
@@ -39,14 +43,23 @@ describe Checkout do
       end
     end
 
-    # Basket: 001,002,003
-    # Total price expected: £66.78
-    context 'when promotional_rules apply' do
+    context 'when total is more than 60 pounds' do
       it 'calculates the correct total price accordingly' do
         co.scan("001")
         co.scan("002")
         co.scan("003")
         expect(co.total).to eq(66.78)
+      end
+    end
+
+    # Basket: 001,003,001
+    # Total price expected: £36.95
+    context 'when two 001 items are in the basket' do
+      it 'calculates the correct total price accordingly' do
+        co.scan("001")
+        co.scan("003")
+        co.scan("001")
+        expect(co.total).to eq(36.95)
       end
     end
 
