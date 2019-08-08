@@ -61,8 +61,6 @@ describe Checkout do
       end
     end
 
-    # Basket: 001,002,001,003
-    # Total price expected: £73.76
     context 'when promotional items are not sequential' do
       it 'still calculates the correct total price' do
         co.scan("001")
@@ -70,6 +68,21 @@ describe Checkout do
         co.scan("001")
         co.scan("003")
         expect(co.total).to eq(73.76)
+      end
+    end
+  end
+
+  describe '#print_receipt' do
+    context 'when the total has been calculated' do
+      it 'displays the basket and total price' do
+        co.scan("001")
+        co.scan("002")
+        co.scan("001")
+        co.scan("003")
+        co.total
+        expect(co.print_receipt).to eq(
+          "Basket: 001,002,001,003\nTotal price expected: £73.76"
+        )
       end
     end
   end

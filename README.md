@@ -37,11 +37,11 @@ co.scan("002")
 co.scan("003")
 ```
 
-Calculate the total and print the receipt:
+Calculate the total and print the "receipt":
 
 ```
 co.total
-co.print
+co.print_receipt
 ```
 
 ## Acceptance criteria

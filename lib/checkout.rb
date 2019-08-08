@@ -25,6 +25,15 @@ class Checkout
     return @total.round(2)
   end
 
+  def print_receipt
+    basket_line = ["Basket: "]
+      @basket.each do |item|
+      basket_line << "#{item},"
+    end
+    total_line = "Total price expected: £#{@total.round(2)}"
+    return basket_line.join("")[0...-1] + "\n" + total_line
+  end
+
 private
   def apply_promotions
     @promotional_rules.each do |method|
