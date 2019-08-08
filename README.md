@@ -23,7 +23,11 @@ Clone this repo, run `bundle install` and open IRB in your terminal. Require the
 p = ["def a() @total = @total -= 1.50 if @basket.count(\"001\") == 2 end", "def b() @total = @total * 0.9 if @total > 60 end"]
 ```
 
-Create a new checkout passing the promotional_rules as an argument `co = Checkout.new(p)`.
+Create a new checkout passing the promotional_rules as an argument
+
+```
+co = Checkout.new(p)
+```
 
 Start scanning your items:
 
