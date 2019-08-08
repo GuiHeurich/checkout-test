@@ -22,7 +22,7 @@ class Checkout
       @total += @products[item]["Price"]
     end
     apply_promotions
-    return @total
+    return @total.round(2)
   end
 
 private

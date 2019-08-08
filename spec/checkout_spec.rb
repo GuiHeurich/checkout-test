@@ -6,7 +6,7 @@ describe Checkout do
     "def a() @total = @total -= 1.50 if @basket.count(\"001\") == 2 end",
     "def b() @total = @total * 0.9 if @total > 60 end"
     ] }
-    
+
   subject(:co) { described_class.new(promotional_rules) }
 
   describe "#scan" do
@@ -52,8 +52,6 @@ describe Checkout do
       end
     end
 
-    # Basket: 001,003,001
-    # Total price expected: £36.95
     context 'when two 001 items are in the basket' do
       it 'calculates the correct total price accordingly' do
         co.scan("001")
@@ -63,5 +61,16 @@ describe Checkout do
       end
     end
 
+    # Basket: 001,002,001,003
+    # Total price expected: £73.76
+    context 'when promotional items are not sequential' do
+      it 'still calculates the correct total price' do
+        co.scan("001")
+        co.scan("002")
+        co.scan("001")
+        co.scan("003")
+        expect(co.total).to eq(73.76)
+      end
+    end
   end
 end
