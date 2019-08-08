@@ -5,7 +5,8 @@ describe Checkout do
   let(:promotional_rules) { [
     "def a() @total = @total -= 1.50 if @basket.count(\"001\") == 2 end",
     "def b() @total = @total * 0.9 if @total > 60 end"
-    ] }
+    ]
+  }
 
   subject(:co) { described_class.new(promotional_rules) }
 
